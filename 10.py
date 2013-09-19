@@ -25,17 +25,4 @@ for i in range(2, max_prime):
 print prime_sum
 
 
-
-# max_prime_sqrt = int(math.floor(math.sqrt(max_prime)) + 1)
-# start_time = time.time()
-#
-# primes = []
-# for i in range(0, max_prime):
-#     primes.append(0)
-#
-#
-# for i in range(2, max_prime):
-#     print i
-
-
 print time.time() - start_time, "seconds"
