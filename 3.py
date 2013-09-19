@@ -1,23 +1,25 @@
 import math
 
+
 def is_prime(nr):
-        limit = int(math.ceil(math.sqrt(nr)))
-	for i in range(2, limit):
-		if nr % i == 0:
-			return False
-	return True
+    limit = int(math.ceil(math.sqrt(nr))) + 1
+    for i in range(2, limit):
+        if nr % i == 0:
+            return False
+    return True
 
 
 def prime_factor(nr):
-	max = 1
-	limit = int(math.sqrt(nr))
+    max = 1
+    limit = int(math.sqrt(nr))
 
-	for i in range(2, limit):
-		if nr % i == 0:
-			if is_prime(i):
-				print i
-				max = i
+    for i in range(2, limit):
+        if nr % i == 0:
+            if is_prime(i):
+                print i
+                max = i
 
-	return max
+    return max
 
-print prime_factor(600851475143)	
+
+print prime_factor(600851475143)
