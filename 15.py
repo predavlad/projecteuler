@@ -5,6 +5,7 @@ matrix = {}
 
 size = 21
 
+
 def print_matrix(matrix):
     global size
     for i in range(size):
