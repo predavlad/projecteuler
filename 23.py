@@ -30,16 +30,6 @@ def is_abundant_number(nr):
     return sum(get_proper_divisors(nr)) > nr
 
 
-# 20161 is the last number that cannot be written as a sum of 2 abundant numbers
-for i in range(1, 20162):
-    if is_abundant_number(i):
-        abundant_numbers.append(i)
-        if i % 2 == 0:
-            even_abundant.append(i)
-        else:
-            odd_abundant.append(i)
-
-
 def check_abundant_sums(n):
     global odd_abundant, even_abundant
 
@@ -53,6 +43,16 @@ def check_abundant_sums(n):
             return False
 
     return True
+
+
+# 20161 is the last number that cannot be written as a sum of 2 abundant numbers
+for i in range(1, 20162):
+    if is_abundant_number(i):
+        abundant_numbers.append(i)
+        if i % 2 == 0:
+            even_abundant.append(i)
+        else:
+            odd_abundant.append(i)
 
 
 for i in range(1, 20162):
