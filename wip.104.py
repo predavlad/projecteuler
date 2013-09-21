@@ -15,6 +15,10 @@ def is_pandigital(nr):
     return True
 
 
+assert is_pandigital(123456789) is True
+assert is_pandigital(956487123123123956487123) is True
+assert is_pandigital(1) is False
+
 f1, f2 = 1, 1
 counter = 2
 found = False
