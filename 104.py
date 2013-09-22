@@ -1,5 +1,7 @@
 import time
 
+# inefficient solution, runs for about 10h
+# the new version run in ~15s
 start_time = time.time()
 
 
