@@ -3,79 +3,53 @@ import time
 start_time = time.time()
 
 
-############# 2.4 seconds
-def is_pandigital(nr, n):
-    nr = str(nr)
-    beg = nr[0:n]
-    end = nr[-n:]
-    for i in map(str, range(1, n + 1)):
-        if i not in beg or i not in end:
-            return False
-    return True
+def digit_pos(n):
+    return (127 + 19 * n) * (7 ** n)
 
 
-######### 4.2
-# def is_pandigital(nr, n):
-#     nr = str(nr)
-#     beg = set(nr[0:n])
-#     end = set(nr[-n:])
-#     return beg == end and beg == set(map(str, range(1, n + 1)))
+def D(A, B, digit_searched):
+    len_a, len_b = len(A), len(B)
+    fib_lengths = {1: len_a, 2: len_b}
+    counter = 2
+
+    while len_b < digit_searched:
+        counter += 1
+        len_b, len_a = len_a, len_b
+        len_b += len_a
+        fib_lengths[counter] = len_b
+
+    counter -= 1
+    while digit_searched > len(A) or counter > 2:
+        digit_searched = abs(fib_lengths[counter] - digit_searched)
+        counter -= 1
+
+    # print "Digit found in number #" + str(counter) + " digit #" + str(len(A) - digit_searched)
+    if counter == 1:
+        digit = str(A)
+    else:
+        digit = str(B)
+    digit = digit[len(A) - digit_searched - 1]
+    # print "Digit found: " + digit
+    print fib_lengths
+    return int(digit)
 
 
-##### 3 seconds
-# def is_pandigital(nr, n):
-#     digits = ''.join(map(str, range(1, n + 1)))
-#     nr = str(nr)
-#     for i in digits:
-#         if str(i) not in nr[0:n]:
-#             return False
-#         if str(i) not in nr[-n:]:
-#             return False
-#     return True
+assert digit_pos(1) == 1022
+assert digit_pos(2) == 8085
+assert digit_pos(17) == 104683731294243150
+assert D('1415926535', '8979323846', 35) == 9
+assert D('1415926535', '8979323846', 36) == 2
+assert D('1415926535', '8979323846', 49) == 4
 
-###### 6 seconds
-# def adapt_nr(nr):
-#     nr = [int(i) for i in list(nr)]
-#     nr.sort()
-#     return nr
-#
-#
-# def is_pandigital(nr, n):
-#     nr = str(nr)
-#     if len(nr) < n:
-#         return False
-#     chk = list(range(1, n + 1))
-#     if adapt_nr(nr[0:n]) != chk: return False
-#     if adapt_nr(nr[-n:]) != chk: return False
-#     return True
+f1 = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
+f2 = '8214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196'
 
-########## 10 seconds
-# def adapt_nr(nr):
-#     nr = [int(i) for i in list(nr)]
-#     nr.sort()
-#     return ''.join([str(i) for i in nr])
-#
-#
-# def is_pandigital(nr, n):
-#     nr = str(nr);
-#     if len(nr) < n: return False
-#     chk = ''.join(str(i) for i in list(range(1, n + 1)))
-#     if adapt_nr(nr[0:n]) != chk: return False
-#     if adapt_nr(nr[-n:]) != chk: return False
-#     return True
+digit_sums = 0
+for i in range(0, 18):
+    print "Searching for digit #", digit_pos(i), "for n = " + str(i)
+    digit = D(f1, f2, digit_pos(i))
+    digit_sums += (10 ** i) * int(digit)
 
-assert is_pandigital(1423, 4)
-assert not is_pandigital(1423, 5)
-assert is_pandigital(14235554123, 4)
-assert not is_pandigital(14235552222, 4)  # !important
-assert not is_pandigital(1444, 4)
-assert is_pandigital(123564987, 9)
-assert not is_pandigital(9999912399999, 3)
-
-# this loop is strictly for benchmarking is_pandigital
-pandigitals = [i for i in range(100000, 999999) if is_pandigital(i, 6)]
-
-print 'Found: ', len(pandigitals), ' numbers'
-print pandigitals
+print digit_sums
 
 print time.time() - start_time, "seconds"
