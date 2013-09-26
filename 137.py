@@ -16,6 +16,6 @@ for i in range(1001):
 
 
 for i in range(1, 31):
-    print "Golden nugger #" + str(i), 'solution: ',  fib[2*i] * fib[2*i + 1]
+    print "Golden nugget #" + str(i), 'solution: ',  fib[2*i] * fib[2*i + 1]
 
 print time.time() - start_time, "seconds"
