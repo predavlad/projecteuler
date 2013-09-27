@@ -1,12 +1,7 @@
-# to be done
-
 import time
-#import num2word
-import math
+import pynum2word
 
 start_time = time.time()
-
-print num2word.to_cart(342)
 
 digits = {
     1: 'one',
@@ -48,12 +43,12 @@ multiples = {
 }
 
 
-#def transform_nr(nr):
-#	temp = nr
-#	text_nr = ''
-#	while temp > 1:
-#		if temp % 1000000:
-#			text_nr += digits[math.floor(temp / 1000000)]
+# def transform_nr(nr):
+#     temp = nr
+#     text_nr = ''
+#     while temp > 1:
+#         if temp % 1000000:
+#             text_nr += digits[math.floor(temp / 1000000)]
 
 
 
