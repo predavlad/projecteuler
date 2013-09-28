@@ -1,0 +1,1 @@
+<?fscanf(STDIN,"%d,%d",$n,$m);function f($n){return$n<2?1:$n*f($n-1);}echo f($n)/f($m)/f($n-$m);

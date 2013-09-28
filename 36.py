@@ -4,10 +4,6 @@ start_time = time.time()
 
 
 def check_palindrome(nr):
-    ### this is apparently not needed
-    # nr = str(nr)
-    # while nr[-1:] == 0:
-    #     nr = nr[0:-1]
     return str(nr) == str(nr)[::-1]
 
 

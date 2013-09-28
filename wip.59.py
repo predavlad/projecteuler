@@ -1,59 +1,43 @@
 import time
-import itertools
-from itertools import izip, cycle
+
 
 start_time = time.time()
+cipher = map(int, open('59.txt').read().split(','))
+# key = [40, 84, 104]
 
 
-def xor_crypt_string(data, key):
-    return ''.join(chr(ord(x) ^ ord(y)) for (x, y) in izip(data, cycle(key)))
+def xor(bytes, keyBytes):
+    returnValue = []
+    # print bytes
+    print keyBytes
+    for i in range(0, len(bytes)):
+        returnValue.append(bytes[i] ^ keyBytes[i % len(keyBytes) - 1])
+    return returnValue
 
 
-def decryptXOR(s, key="\x101Z"):
-    output = ""
-    for character in s:
-        for letter in key[::-1]:
-            character = chr(ord(character) ^ ord(letter))
-        output += character
-    return output
+def dictionaryTest(string, words):
+    positives = 0
+    for w in words:
+        if w in string:
+            positives += 1
+    return positives
 
 
-def descipher(txt, key):
-    desciphered_text = ''
-    current_key = 0
-    key_len = 3
-    for i in txt:
-        new_ascii = int(key[current_key] ^ int(i))
-        desciphered_text += chr(new_ascii)
-        current_key += 1
-        current_key %= key_len
+# def crack():
+#     testWords = ['the', 'be', 'to', 'of', 'and']
+#     global cipher, keyPoss
+#     for a in keyPoss:
+#         for b in keyPoss:
+#             for c in keyPoss:
+#                 key = [ord(a), ord(b), ord(c)]
+#                 dec = xor(cipher, key)
+#                 cracked = ''.join([chr(d) for d in dec])
+#                 if dictionaryTest(cracked, testWords) >= 5:
+#                     print(str(sum(dec)) + " - " + cracked)
 
-    return desciphered_text
 
-
-# key = [ord('('), ord('T'), ord('h')]
-# print key
-
-txt = open('59.txt').read().split(',')
-key = [40, 84, 104]
-txt = map(chr, map(int, txt))
-print txt
-# print map(chr, range(97, 123))
-# keys = range(97, 123)
-# shown = 0
-#
-# print 40 ^ 79, 84 ^ 59, 104 ^ 12
-
-print decryptXOR(txt, key)
-
-# for i in list(itertools.combinations(keys, 3)):
-#     desciphered_text = descipher(txt, i)
-#     if desciphered_text:
-#         shown += 1
-#         print desciphered_text
-#
-# print shown
-
-# print descipher(txt)
+keyPoss = [chr(i) for i in range(97, 123)]
+key = [ord('g'), ord('o'), ord('d')]
+print map(chr, xor(cipher, key))
 
 print time.time() - start_time, "seconds"
