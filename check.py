@@ -59,12 +59,12 @@ def time_limit_check_domain(domain, seconds=0):
 
 
 if __name__ == '__main__':
-    domains = list(open("domains.txt").read().split("\n"))
-    # script, names, tlds = argv
-    # names = names.split(',')
-    # tlds = tlds.split(',')
-    #
-    # domains = generate_domains(names, tlds)
+    # domains = list(open("domains.txt").read().split("\n"))
+    script, names, tlds = argv
+    names = names.split(',')
+    tlds = tlds.split(',')
+
+    domains = generate_domains(names, tlds)
 
     domains = [domain for domain in domains if len(domain) > 3]
 
