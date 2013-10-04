@@ -36,7 +36,6 @@ def is_permutation(a, b):
     return False
 
 # get all primes composed of 4 digits
-# we get ~ 1000 primes, which is pretty nice
 primes = get_primes(10001)
 primes = primes[168:]
 

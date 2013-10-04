@@ -3,12 +3,10 @@ import math
 
 start_time = time.time()
 
+
 def digit_sum(n):
-    n = str(n);
-    dig_sum = 0
-    for i in n:
-        dig_sum += int(i)
-    return dig_sum
+    return sum(map(int, str(n)))
+
 
 assert digit_sum(22) == 4
 assert digit_sum(999) == 27

@@ -1,5 +1,5 @@
 import time
-
+# 0.01 seconds
 start_time = time.time()
 
 power_sum = 0
