@@ -26,7 +26,6 @@ i = 1
 total = 0
 increment = 2
 counter = 1
-largest_prime = 0
 debug_str = "Checked %d numbers on diagonals, found %d primes, square area %d, ratio %f"
 
 prime_no = 0
