@@ -39,6 +39,21 @@ class Fraction:
         return str(self.numerator) + '/' + str(self.denominator)
 
 
+def get_2(n):
+    global e
+    if n == 0:
+        return Fraction(1)
+    return Fraction(1, Fraction(2) + get_2(n - 1))
+
+
+def get_e(n):
+    global e
+    if n == 0:
+        return Fraction(2)
+    print n, e[n]
+    return Fraction(1, Fraction(e[n]) + get_e(n - 1))
+
+
 e = []
 starter = 2
 for i in range(1, 101):
@@ -46,13 +61,10 @@ for i in range(1, 101):
     e.append(2*i)
     e.append(1)
 
-def get_e(n):
-    global e
-    if n == 0:
-        return Fraction(2)
-    print n, e[n]
-    return Fraction(1, Fraction(e[n]) + get_e(n-1))
+print e
 
+
+print get_2(3)
 
 print get_e(2)
 
