@@ -40,10 +40,13 @@ def get_cached_divisors(n):
 
     return rez
 
+
 # get first consecutive n numbers to have n distinct prime factors
 def get_consecutive(n):
     numbers = range(n)
     for i in range(n, 1500000):
+        if i % 10000 == 0:
+            print 'Reached %d numbers.' % i
         del numbers[0]
         numbers.append(i)
         all_divisors = []
@@ -58,7 +61,7 @@ def get_consecutive(n):
 
 cached_divisors = {}
 
-print get_consecutive(3)
+print get_consecutive(4)
 
 
 # print get_divisors(644)
