@@ -1,19 +1,22 @@
+import time
+
+start_time = time.time()
+
+
 def check_palindrome(nr):
     return str(nr) == str(nr)[::-1]
 
 
 def find_palindromes(length):
-    min = int('1' + '0' * (length - 1))
-    max = int('9' * length) + 1
-    print min, max
-    maxPal = 0
-    for i in reversed(range(min, max)):
-        for j in reversed(range(min, max)):
+    inf = int('1' + '0' * (length - 1))
+    sup = inf * 10
+    for i in xrange(sup, inf, -1):
+        for j in xrange(sup, i, -1):
             nr = i * j
             if check_palindrome(nr):
-                if nr > maxPal:
-                    maxPal = nr
-    return maxPal
+                yield nr
 
 
-print find_palindromes(3)
+print max([i for i in find_palindromes(3)])
+
+print time.time() - start_time, "seconds"

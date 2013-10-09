@@ -1,14 +1,12 @@
+import time
+
+start_time = time.time()
+
 length = 101
 
-squaresSum = 0
-for i in range(1, length):
-    squaresSum += (i ** 2)
+squaresSum = sum([i ** 2 for i in xrange(length)])
+sumSquared = sum([i for i in xrange(length)]) ** 2
 
+print sumSquared - squaresSum
 
-sumSquares = 0
-for i in range(1, length):
-    sumSquares += i
-
-sumSquares = sumSquares * sumSquares
-
-print sumSquares - squaresSum
+print time.time() - start_time, "seconds"

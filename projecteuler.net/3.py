@@ -1,25 +1,20 @@
 import math
+import time
+
+start_time = time.time()
 
 
-def is_prime(nr):
-    limit = int(math.ceil(math.sqrt(nr))) + 1
-    for i in range(2, limit):
-        if nr % i == 0:
-            return False
-    return True
-
-
-def prime_factor(nr):
-    max = 1
+def prime_factors(nr):
     limit = int(math.sqrt(nr))
 
     for i in range(2, limit):
         if nr % i == 0:
-            if is_prime(i):
-                print i
-                max = i
+            yield i
+        while nr % i == 0:
+            nr /= i
 
-    return max
+nr = 600851475143
+print max([i for i in prime_factors(nr)])
 
 
-print prime_factor(600851475143)
+print time.time() - start_time, "seconds"

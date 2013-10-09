@@ -1,24 +1,30 @@
-import math
+import time
+
+start_time = time.time()
 
 
-def is_prime(nr):
-    limit = int(math.ceil(math.sqrt(nr))) + 1
-    for i in range(2, limit):
-        if nr % i == 0:
-            return False
-    return True
+def get_primes(n):
+    """
+    Get all the primes smaller than n
+    """
+    primes = [0] * n
+    for i in xrange(2, n):
+        if primes[i] == 0:
+            yield i
+        else:
+            continue
+        for j in xrange(1, n // i):
+            primes[j * i] = 1
 
 
-def get_prime_no(pos):
-    current_pos = 1
-    current_no = 2
-    while pos != current_pos:
-        current_no += 1
-        if is_prime(current_no):
-            current_pos += 1
+counter = 0
+for i in get_primes(200000):
+    counter += 1
+    if counter == 10001:
+        print i
+        break
 
-    return current_no
-
-print get_prime_no(10001)
+print counter
 
 
+print time.time() - start_time, "seconds"

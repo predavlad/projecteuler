@@ -1,5 +1,7 @@
-sum = 0
-for i in range(1, 1000):
-    if (i % 3 == 0) or (i % 5 == 0):
-        sum += i
-print sum
+import time
+
+start_time = time.time()
+print sum([i for i in range(1000) if not (i % 5 and i % 3)])
+
+
+print time.time() - start_time, "seconds"

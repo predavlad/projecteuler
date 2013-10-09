@@ -1,16 +1,16 @@
-def fib(limit):
-    a = 1
-    b = 1
-    temp = sum = 0
-    while b < limit:
-        temp = a
-        a = b
-        b += temp
-        if b % 2 == 0 and b < limit:
-            print b
-            sum += b
+import time
 
-    return sum
+start_time = time.time()
 
 
-print fib(4000000)
+def fib(lim):
+    a = b = 1
+    while b < lim:
+        yield b
+        a, b = b, a + b
+
+
+print sum([i for i in fib(4000000) if i % 2 == 0])
+
+
+print time.time() - start_time, "seconds"
