@@ -1,28 +1,22 @@
-# damn, couldn't install numpy :(
-import math
 import time
-
+# 0.7 seconds, fairly decent
 start_time = time.time()
-max_prime = 2000000
 
 
-def is_prime(nr):
-    if nr == 2:
-        return True
-    limit = int(math.ceil(math.sqrt(nr))) + 1
-    for i in range(2, limit):
-        if nr % i == 0:
-            return False
-    return True
+def get_primes(n):
+    """
+    Get all the primes smaller than n
+    """
+    primes = [0] * n
+    for i in xrange(2, n):
+        if primes[i] == 0:
+            yield i
+        else:
+            continue
+        for j in xrange(1, n // i):
+            primes[j * i] = 1
 
 
-prime_sum = 0
-for i in range(2, max_prime):
-    if is_prime(i):
-        prime_sum += i
-
-
-print prime_sum
-
+print sum([i for i in get_primes(2000000)])
 
 print time.time() - start_time, "seconds"

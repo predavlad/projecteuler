@@ -1,4 +1,5 @@
 import time
+from operator import mul
 
 start_time = time.time()
 
@@ -26,25 +27,20 @@ string = """
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
 """
 
+l = [map(int, i.split(' ')) for i in string.split("\n") if i != '']
+print l
 max_prod = 0
-l = string.split("\n")
-
-# remove unneeded l
-l.pop()
-l.pop(0)
-
-for i in range(len(l)):
-    l[i] = map(int, l[i].split(' '))
 
 for i in xrange(16):
     for j in xrange(16):
         max_prod = max(
             max_prod,
             # rows
-            l[i][j] * l[i][j + 1] * l[i][j + 2] * l[i][j + 3],
-            l[i + 1][j] * l[i + 1][j + 1] * l[i + 1][j + 2] * l[i + 1][j + 3],
-            l[i + 2][j] * l[i + 2][j + 1] * l[i + 2][j + 2] * l[i + 2][j + 3],
-            l[i + 3][j] * l[i + 3][j + 1] * l[i + 3][j + 2] * l[i + 3][j + 3],
+            reduce(mul, l[i][j:j+4]),
+            reduce(mul, l[i + 1][j:j + 4]),
+            reduce(mul, l[i + 2][j:j + 4]),
+            reduce(mul, l[i + 3][j:j + 4]),
+
             # columns
             l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j],
             l[i][j + 1] * l[i + 1][j + 1] * l[i + 2][j + 1] * l[i + 3][j + 1],

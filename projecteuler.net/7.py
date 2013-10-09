@@ -21,10 +21,9 @@ counter = 0
 for i in get_primes(200000):
     counter += 1
     if counter == 10001:
-        print i
+        print "The 10001th primes is %d." % i
         break
 
-print counter
 
 
 print time.time() - start_time, "seconds"
