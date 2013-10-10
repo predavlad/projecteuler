@@ -1,6 +1,6 @@
 import time
-import math
 
+# 0.002 seconds
 start_time = time.time()
 
 sequenceLen = 0
@@ -11,20 +11,16 @@ for i in range(1000, 1, -1):
         break
 
     val = 1
-    remainders[i] = 0
-    remainders[val] = 0
-    pos = 0
+    remainders[i] = remainders[val] = pos = 0
 
     while remainders[val] == 0 and val != 0:
-        remainders[val] = pos
-        val *= 10
-        val %= i
-        pos += 1
+        remainders[val], pos = pos, pos + 1
+        val = (val * 10) % i
         if val not in remainders:
             remainders[val] = 0
 
     if (pos - remainders[val]) > sequenceLen:
-        sequenceLen = pos - remainders[val]
+        sequenceLen = pos - remainders[val] + 1
 
 
 print sequenceLen
