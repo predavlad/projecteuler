@@ -1,39 +1,23 @@
 import time
 import math
-
+# 2.5 seconds
 start_time = time.time()
 
 
 def divisor_number(nr):
-    divisors = 0
-    limit = int(math.sqrt(nr / 2))
-
-    print "\n", nr, ': ',
-
-    for i in range(1, limit + 1):
-        if nr % i == 0:
-            divisors += 2
-
-    if limit * limit == nr:
-        divisors -= 1
-
-    print divisors,
-    return divisors
+    return sum([2 for i in xrange(1, int(math.sqrt(nr / 2))) if nr % i == 0])
 
 
-current = 0
-increment = 0
-
-not_found = True
-while not_found:
+found, current, increment = 0, 0, False
+while not found:
     increment += 1
     current += increment
 
     if divisor_number(current) > 500:
-        not_found = False
+        found = True
 
 
-print "\n Result is: ", current
+print "\nResult is: ", current
 
 
 print time.time() - start_time, "seconds"

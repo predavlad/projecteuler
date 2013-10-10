@@ -1,12 +1,9 @@
-# sum
-digits = str(2 ** 1000)
-sum = 0
+import time
 
-for i in range(len(digits)):
-    sum += int(digits[i])
+start_time = time.time()
 
-print sum
-
-# print map(int, str(2 ** 15).split()))
+# a one liner :P
+print sum([int(i) for i in str(2 ** 1000)])
 
 
+print time.time() - start_time, "seconds"

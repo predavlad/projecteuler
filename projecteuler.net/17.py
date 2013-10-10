@@ -65,9 +65,9 @@ assert transform_nr(100) == 'one hundred'
 assert get_number_len(342) == 23
 assert get_number_len(115) == 20
 
-letter_counter = [get_number_len(i) for i in range(1, 1001)]
-print letter_counter
-print sum(letter_counter)
+
+print sum([get_number_len(i) for i in xrange(1, 1001)])
+
 
 print time.time() - start_time, "seconds"
 

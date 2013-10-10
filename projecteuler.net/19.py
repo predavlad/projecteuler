@@ -11,12 +11,10 @@ counter = 0
 
 while varDate < endDate:
     varDate += datetime.timedelta(days=7)
-    # Sunday + first day of the month
     if varDate.weekday() == 6 and varDate.day == 1:
-        print varDate.weekday(), varDate.day, varDate
         counter += 1
 
 
-print counter  # for some reason python calculates 2 extra days it shouldn't
+print counter
 
 print time.time() - start_time, "seconds"

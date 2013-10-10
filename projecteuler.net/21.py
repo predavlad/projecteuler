@@ -5,33 +5,24 @@ import time
 start_time = time.time()
 
 
-def get_proper_divisors(nr):
-    divisors = [1]
-    for i in range(2, int(math.floor(nr / 2)) + 1):
-        if nr % i == 0:
-            divisors.append(i)
-
-    return divisors
+def divisor_sum(n):
+    return sum(get_proper_divisors(n))
 
 
-def is_amicable_number(nr):
-    divisors = get_proper_divisors(nr)
-    amicable_nr = sum(divisors)
-
-    if amicable_nr != nr and sum(get_proper_divisors(amicable_nr)) == nr:
-        return True
-
-    return False
+def get_proper_divisors(n):
+    yield 1
+    for i in xrange(2, int(math.floor(n / 2)) + 1):
+        if n % i == 0:
+            yield i
 
 
-amicable_numbers = []
+def is_amicable_number(n):
+    amicable_nr = divisor_sum(n)
+    return amicable_nr != n and divisor_sum(amicable_nr) == n
 
-for i in range(1, 10001):
-    if is_amicable_number(i):
-        amicable_numbers.append(i)
 
-print amicable_numbers
-print sum(amicable_numbers)
+print sum([i for i in range(1, 10001) if is_amicable_number(i)])
+
 
 
 print time.time() - start_time, "seconds"

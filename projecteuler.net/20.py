@@ -1,16 +1,10 @@
 import time
+from operator import mul
 
 start_time = time.time()
 
-product = 1
-for i in range(2, 101):
-    product *= i
+product = str(reduce(mul, xrange(2, 101)))
+print sum([int(product[i]) for i in range(0, len(product))])
 
-product = str(product)
-fact_sum = 0
-for i in range(0, len(product)):
-    fact_sum += int(product[i])
-
-print fact_sum
 
 print time.time() - start_time, "seconds"
