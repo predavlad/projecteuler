@@ -1,23 +1,21 @@
 import time
-import math
-
+# 0.4 seconds
 start_time = time.time()
 
-def is_digit_fact(nr):
-    nr_str = str(nr)
-    sum_digits = 0
-    for i in nr_str:
-        sum_digits += math.factorial(int(i))
 
-    if sum_digits == nr:
-        return True
-    return False
+def is_digit_fact(n):
+    global facts
+    return n == sum([facts[int(i)] for i in str(n)])
 
-rez = []
-for i in range(11, 1000001):
-    if is_digit_fact(i):
-        rez.append(i)
 
+# generate the digit factorials that will be used
+facts = {}
+fact = lambda x: 1 if x == 0 else x * fact(x - 1)
+for i in range(10):
+    facts[i] = fact(i)
+
+
+rez = [i for i in xrange(3, 10 ** 5) if is_digit_fact(i)]
 print sum(rez)
 
 print time.time() - start_time, "seconds"

@@ -1,54 +1,59 @@
 import time
-import math
 from collections import deque
 
-# run time - 2 seconds
+# 1.1 seconds, of which 0.3 is the prime generation
 start_time = time.time()
 
 
-def is_prime(nr):
-    limit = int(math.ceil(math.sqrt(nr))) + 1
-    for i in range(2, limit):
-        if nr % i == 0:
-            return False
-    return True
+def get_primes(n):
+    """
+    Get all the primes smaller than n
+    """
+    primes = [0] * n
+    for i in xrange(2, n):
+        if primes[i] == 0:
+            yield i
+        else:
+            continue
+        for j in xrange(1, n // i):
+            primes[j * i] = 1
 
 
-def is_circular(nr):
-    rotation = deque(str(nr))
+def prime_rotation(rot):
+    return int(''.join(rot)) in primes
+
+
+def is_circular(n):
+    """
+    Check if a number is circular (all rotations of it's letters are prime)
+    """
+    global primes
+    rotation = deque(str(n))
     if '0' in rotation or '2' in rotation or '4' in rotation or '6' in rotation or '8' in rotation:
         return False
 
-    rotations = [list(rotation)]
-    for i in range(1, len(str(nr))):
+    if not prime_rotation(rotation):
+        return False
+    for i in xrange(1, len(str(n))):
         rotation.rotate()
-        rotations.append(list(rotation))
-
-    for i in range(len(str(nr))):
-        to_check = int(''.join(rotations[i]))
-        if not is_prime(to_check):
+        if not prime_rotation(rotation):
             return False
 
     return True
 
 
 def get_circulars_limit(n):
-    rez = [2]  # too lazy to do special handling for the only even prime number
-    for i in range(3, n + 1):
+    """
+    Get circular numbers under n
+    """
+    for i in xrange(3, n + 1, 2):
         if is_circular(i):
-            rez.append(i)
-
-    return rez
-
-assert not is_circular(35)
-assert is_circular(197)
-assert is_circular(17)
-assert is_circular(11)
-assert len(get_circulars_limit(100)) == 13
+            yield i
 
 
-rez = get_circulars_limit(1000000)
-print rez
-print len(rez)
+lim = 10 ** 6
+primes = set(get_primes(lim))
+
+print len(list(get_circulars_limit(lim)))
 
 print time.time() - start_time, "seconds"

@@ -3,14 +3,12 @@ import time
 start_time = time.time()
 
 coins = [1, 2, 5, 10, 20, 50, 100, 200]
+matrix, target = {}, 200
 
-TARGET = 200
-
-matrix = {}
-for y in xrange(0, TARGET + 1):
+for y in xrange(0, target + 1):
     matrix[y, 0] = 1
 
-for y in xrange(0, TARGET + 1):
+for y in xrange(0, target + 1):
     print y, ":", 1,
     for x in xrange(1, len(coins)):
         matrix[y, x] = 0
