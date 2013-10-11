@@ -32,12 +32,10 @@ def is_circular(n):
     if '0' in rotation or '2' in rotation or '4' in rotation or '6' in rotation or '8' in rotation:
         return False
 
-    if not prime_rotation(rotation):
-        return False
-    for i in xrange(1, len(str(n))):
-        rotation.rotate()
+    for i in xrange(len(str(n))):
         if not prime_rotation(rotation):
             return False
+        rotation.rotate()
 
     return True
 
