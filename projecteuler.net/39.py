@@ -1,40 +1,49 @@
 import time
 import math
+from fractions import gcd
 
-# 0.1 seconds
+# 0.001 seconds
 start_time = time.time()
 
 
-def is_whole(n):
-    return n % 1 == 0
+def get_pythagorean_primes(lim):
+    root = int(math.sqrt(lim)) + 1
+    for n in xrange(1, root):
+        for m in xrange(n + 1, root):
+            if gcd(m, n) == 1 and ((m - n) % 2):
+                a, b, c = 2 * m * n, m ** 2 - n ** 2, m ** 2 + n ** 2
+                if c < lim:
+                    yield a, b, c
 
 
-def float_eq(n):
-    return abs(int(n) - n) <= 0
+def get_pythagorean_pairs(lim):
+    for a, b, c in get_pythagorean_primes(lim):
+        k = 1
+        while True:
+            ka, kb, kc = k * a, k * b, k * c
+            k += 1
+            if kc > lim:
+                break
+            yield ka, kb, kc
 
 
-def get_b(a, p):
-    a, b = float(a), float(p)
-    return (p ** 2 - 2 * p * a) / (2 * p - 2 * a)
+lim, perim = 1001, {}
+max_perim, max_count = 0, 0
+
+for i in range(lim):
+    perim[i] = 0
 
 
-assert get_b(20, 120) == 48
+for pyt in get_pythagorean_pairs(lim // 2):
+    if sum(pyt) < lim:
+        perim[sum(pyt)] += 1
 
-max_nr = 0
-max_solutions = 0
 
-for p in range(20, 1000, 2):
-    count = 0
-    for a in range(1, int(p / 3) + 1):
-        b = get_b(a, p)
-        if is_whole(b) and a <= b:
-            c = math.sqrt(a ** 2 + b ** 2)
-            count += 1
-            # print p, a, b, c
-    if count > max_solutions:
-        max_solutions = count
-        max_nr = p
+for i in perim:
+    if perim[i] > max_count:
+        max_count, max_perim = perim[i], i
 
-print max_solutions, max_nr
+print max_perim
+
 
 print time.time() - start_time, "seconds"
