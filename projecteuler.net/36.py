@@ -1,31 +1,18 @@
 import time
 
+# 0.3 seconds
 start_time = time.time()
 
 
-def check_palindrome(nr):
+def is_palindrome(nr):
     return str(nr) == str(nr)[::-1]
 
 
-def is_double_base_palindrome(nr):
-    if not check_palindrome(nr):
-        return False
-
-    bin_nr = str(bin(nr)).replace('0b', '')
-    if not check_palindrome(bin_nr):
-        return False
-
-    return True
+def is_double_base_palindrome(n):
+    return is_palindrome(n) and is_palindrome(str(bin(n)).replace('0b', ''))
 
 
-rez = []
-for i in range(1, 1000000):
-    if is_double_base_palindrome(i):
-        rez.append(i)
+print sum([i for i in xrange(1, 10**6, 2) if is_double_base_palindrome(i)])
 
-
-print rez
-print len(rez)
-print sum(rez)
 
 print time.time() - start_time, "seconds"
