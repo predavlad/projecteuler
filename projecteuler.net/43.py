@@ -1,28 +1,28 @@
 import time
 from itertools import permutations
 
-# 11 seconds, not the greatest time, but got the job done!
+# 10 seconds, not the greatest time, but got the job done!
+# it can be solved without brute force though
 start_time = time.time()
 
 
 primes = [2, 3, 5, 7, 11, 13, 17]
 digits = list(range(0, 10))
-pandigitals = list(permutations(digits, len(digits)))
-numbers = []
+numbers = 0
 
 
-for pand in pandigitals:
+for pand in permutations(digits, len(digits)):
     good = True
-    for i in range(1, len(pand) - 2):
+    for i in xrange(1, len(pand) - 2):
         current = int(''.join(map(str, pand[i:i+3])))
         if current % primes[i - 1] != 0:
             good = False
             break
     if good:
         good_number = int(''.join(map(str, pand)))
-        numbers.append(good_number)
+        numbers += good_number
 
 
-print sum(numbers)
+print numbers
 
 print time.time() - start_time, "seconds"

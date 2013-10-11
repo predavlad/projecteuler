@@ -1,16 +1,16 @@
 import time
 import math
 
-# 5 seconds
+# 6.7 seconds
 start_time = time.time()
 
 
-# thank you math!
 def is_pentagonal(n):
-    # Necessary condition:
-    #     (1 + 24n) is a perfect square
-    # Required:
-    #     sqrt(1 + 24n) = 5 mod 6
+    """
+     Necessary condition:
+         (1 + 24n) is a perfect square
+         sqrt(1 + 24n) = 5 mod 6
+    """
     root = math.sqrt(1 + 24 * n)
     return True if root == math.trunc(root) and root % 6 == 5 else False
 
@@ -22,18 +22,16 @@ def get_diff(n1, n2):
 
 
 pentagonal = [n * (3 * n - 1) / 2 for n in range(1, 3000)]
-minim = None
+minim = 10 ** 10
 vals = []
 
-for i in range(len(pentagonal)):
-    for j in range(i, len(pentagonal)):
-        rez = get_diff(pentagonal[i], pentagonal[j])
+for i in pentagonal:
+    for j in pentagonal:
+        rez = get_diff(i, j)
         if rez:
-            if minim is None:
+            if minim > rez:
+                vals = [i, j]
                 minim = rez
-            elif minim > rez:
-                    vals = [pentagonal[i], pentagonal[j]]
-                    minim = rez
 
 
 
