@@ -1,53 +1,47 @@
 import time
 import math
 
-# ~12 seconds
+# 0.38 seconds
 start_time = time.time()
 
 
-def is_prime(nr):
-    if nr == 2:
-        return True
-    limit = int(math.ceil(math.sqrt(nr))) + 1
-    for i in range(2, limit):
-        if nr % i == 0:
-            return False
-    return True
+def get_primes(n):
+    """
+    Get all the primes smaller than n
+    """
+    primes = [0] * n
+    for i in xrange(2, n):
+        if primes[i] == 0:
+            yield i
+        else:
+            continue
+        for j in xrange(1, n // i):
+            primes[j * i] = 1
 
 
-def is_truncatable_prime(nr):
-    if not is_prime(nr) or nr < 10 or str(nr)[0] == '1' or str(nr)[-1] == '1':
+def is_truncatable_prime(n):
+    """
+    Receive a prime number as input, and determine if the number is a truncatable primes.
+    A truncatable prime means that removing digits from left or right results only in primes
+    Ex: 3797 is a truncatable primes:
+        - remove digits from right => 3797, 379, 37 and 3 are primes
+        - remove digits from left => 3797, 797, 97 and 7 are primes
+    """
+    global primes
+    digit_primes = ['2', '3', '5', '7']
+    if n < 10 or str(n)[0] not in digit_primes or str(n)[-1] not in digit_primes:
         return False
 
-    temp = str(nr)
-    while len(temp) > 1:
-        temp = temp[0:-1]
-        if not is_prime(int(temp)):
-            return False
-
-    temp = str(nr)
-    while len(temp) > 1:
-        temp = temp[1:]
-        if not is_prime(int(temp)):
+    for i in range(1, len(str(n))):
+        right, left = int(str(n)[0:i]), int(str(n)[i:])
+        if right not in primes or left not in primes:
             return False
 
     return True
 
 
-assert not is_truncatable_prime(11)
-assert is_truncatable_prime(3797)
-assert is_truncatable_prime(797)
-assert not is_truncatable_prime(2)
-
-rez = []
-for i in range(1, 1000000):
-    if is_truncatable_prime(i):
-        rez.append(i)
-
-
-print rez
-print len(rez)
-print sum(rez)
+primes = set(get_primes(10 ** 6))  # 1 million is enough
+print sum([i for i in primes if is_truncatable_prime(i)])
 
 
 print time.time() - start_time, "seconds"
