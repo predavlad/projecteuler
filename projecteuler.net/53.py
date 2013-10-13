@@ -21,13 +21,13 @@ def C(n, r):
 LIMIT = 10 ** 6
 
 counter = 0
-for n in range(20, 101):
-    for r in range(1, n):
+for n in xrange(20, 101):
+    for r in xrange(1, n):
         combs = C(n, r)
         if combs > LIMIT:
             nr = abs(r - (n - r)) + 1
             counter += nr
-            print 'C(%d, %d) == C(%d, %d) = %d - counter %d' % (n, r, n, n - r, combs, nr)
+            # print 'C(%d, %d) == C(%d, %d) = %d - counter %d' % (n, r, n, n - r, combs, nr)
             break
 
 print counter

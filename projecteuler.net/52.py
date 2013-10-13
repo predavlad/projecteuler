@@ -1,25 +1,18 @@
 import time
 
-# 4 seconds
+# 2.3 seconds
 start_time = time.time()
 
 
 # check if 2 numbers are permutations of each other
 def is_permutation(a, b):
-    a = list(str(a))
-    b = str(b)
-    while a:
-        letter = a.pop()
-        b = b.replace(letter, '', 1)
-
-    if len(b) == 0:
-        return True
-    return False
+    a, b = set(str(a)), set(str(b))
+    return len(a & b) == len(a) == len(b)
 
 max_check = 6
-for i in range(1, 1000000):
+for i in xrange(1, 1000000):
     correct = True
-    for j in range(max_check):
+    for j in xrange(max_check):
         if not is_permutation(i * (j + 1), i):
             correct = False
     if correct:
