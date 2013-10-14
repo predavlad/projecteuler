@@ -2,6 +2,8 @@ import time
 import copy
 
 # 0.002 seconds
+# as far as I can tell this doesn't work if there is more than 1 occurrence in
+# the passcode
 start_time = time.time()
 
 
@@ -10,6 +12,9 @@ def parse_keylog(keylog):
     We know that every 3 digit key contains 3 characters from the passcode
     The characters are in order, so this means that from the code 317
     3 is before 1, 1 is before 7
+
+    So we make a list that contains all the numbers that need to be before and after the number.
+    Will save them in a tuple (before, after)
     """
     keys = {}
     for key in keylog:
@@ -22,7 +27,7 @@ def parse_keylog(keylog):
 
 def find_first(keys):
     """
-    Find the number that's most likely to be first
+    Find the number that has to be the first in the current list
     """
     for i in keys:
         is_first = True
@@ -36,7 +41,7 @@ def find_first(keys):
 
 def remove_start(n, keys):
     """
-    Remove all the instances where n is present before the current number
+    Remove all the instances of n where n is present before the current number
     """
     del keys[n]
     new_keys = copy.deepcopy(keys)
@@ -49,8 +54,7 @@ def remove_start(n, keys):
 
 def find_passcode(keys):
     """
-    At every iteration I try and find the number that is not preceded by anything,
-    and completely remove all occurrences until I stop find a first number.
+    Search for the passcode in the given list of partial passcodes
     """
     first = find_first(keys)
     passcode = ''
@@ -63,9 +67,9 @@ def find_passcode(keys):
 
 
 keylogs = list(set(open('79.txt').read().split("\n")))
-keys = parse_keylog(keylogs)
+parsed_keys = parse_keylog(keylogs)
 
-print find_passcode(keys)
+print find_passcode(parsed_keys)
 
 
 print time.time() - start_time, "seconds"
