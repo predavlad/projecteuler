@@ -1,16 +1,14 @@
 import time
 from fractions import Fraction
 
-# 0.6 seconds
+# 0.65 seconds
 start_time = time.time()
 
 
-LIMIT = 1000
 fract = Fraction(1, 2)
-numbers = []
-counter = 0
+numbers, counter, lim = [], 0, 1000
 
-for i in range(LIMIT):
+for i in xrange(lim):
     fract = Fraction(1, Fraction(2) + fract)
     current_fract = Fraction(1) + fract
 
@@ -23,4 +21,4 @@ print counter
 # print numbers
 
 
-print 'Seconds', time.time() - start_time
+print time.time() - start_time, 'seconds'

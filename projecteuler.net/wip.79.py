@@ -1,40 +1,71 @@
 import time
+import copy
 
+# 0.002 seconds
 start_time = time.time()
-
-
 
 
 def parse_keylog(keylog):
     """
     We know that every 3 digit key contains 3 characters from the passcode
     The characters are in order, so this means that from the code 317
-    There is 1 after 3, and 7 after 1
+    3 is before 1, 1 is before 7
     """
     keys = {}
     for key in keylog:
-        if key[0] not in keys:
-            keys[key[0]] = [(None, key[1])]
-        else:
-            keys[0].append((None, key[1]))
-
-        if key[1] not in keys:
-            keys[key[1]] = [(key[0], key[2])]
-        else:
-            keys[key[1]].append((key[0], key[2]))
-
-        if key[2] not in keys:
-            keys[key[2]] = [(key[1], None)]
-        else:
-            keys[key[2]].append((key[1], None))
+        keys.setdefault(key[0], set()).add((None, key[1]))
+        keys.setdefault(key[1], set()).add((key[0], key[2]))
+        keys.setdefault(key[2], set()).add((key[1], None))
 
     return keys
 
-# read keylog file + remove duplicates
-# duplicates are not needed since we are looking for the shortest passcode
-keylogs = list(set(open('79.txt').read().split("\n")))
 
+def find_first(keys):
+    """
+    Find the number that's most likely to be first
+    """
+    for i in keys:
+        is_first = True
+        for s in keys[i]:
+            if s[0] is not None:
+                is_first = False
+        if is_first:
+            return i
+    return None
+
+
+def remove_start(n, keys):
+    """
+    Remove all the instances where n is present before the current number
+    """
+    del keys[n]
+    new_keys = copy.deepcopy(keys)
+    for i in keys:
+        for s in keys[i]:
+            if s[0] == n:
+                new_keys[i].discard(s)
+    return new_keys
+
+
+def find_passcode(keys):
+    """
+    At every iteration I try and find the number that is not preceded by anything,
+    and completely remove all occurrences until I stop find a first number.
+    """
+    first = find_first(keys)
+    passcode = ''
+
+    while first is not None:
+        passcode += first
+        keys = remove_start(first, keys)
+        first = find_first(keys)
+    return passcode
+
+
+keylogs = list(set(open('79.txt').read().split("\n")))
 keys = parse_keylog(keylogs)
-print keys
+
+print find_passcode(keys)
+
 
 print time.time() - start_time, "seconds"

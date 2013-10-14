@@ -1,8 +1,8 @@
 import time
-from itertools import permutations
 
 # 2 minutes
 start_time = time.time()
+
 
 def is_permutation(a, b):
     if a == b:
@@ -28,19 +28,7 @@ def is_permutation(a, b):
 #
 #
 def is_cube(nr):
-    return pow(nr, 1.0 / 3) == int(pow(nr, 1.0 / 3))
-#
-#
-# def is_perm_cubes(n, limit):
-#     perms = get_permutations(n)
-#     print perms
-#     cubes = 0
-#     for perm in perms:
-#         if is_cube(perm):
-#             cubes += 1
-#     if cubes == limit:
-#         return True
-#     return False
+    return nr ** (1/3.0) % 1 == 0
 
 
 def get_max_perm(n):
@@ -55,12 +43,16 @@ def get_min_perm(n):
 assert get_max_perm(345) == 543
 
 
+assert is_cube(8)
+assert not is_cube(20)
+
+
 limit = 5
 cubes = range(500, 5500)
 perms = {}
 
-for i in range(len(cubes)):
-    for j in range(i, len(cubes)):
+for i in xrange(len(cubes)):
+    for j in xrange(i, len(cubes)):
         cube_i = cubes[i] ** 3
         cube_j = cubes[j] ** 3
         if is_permutation(cube_i, cube_j):
@@ -80,26 +72,6 @@ for i in range(len(cubes)):
 print '=== Done ==='
 
 print perms
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

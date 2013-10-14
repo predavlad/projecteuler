@@ -1,8 +1,6 @@
 import time
-import math
-import numpy
 
-# 3.5 seconds
+# 4 seconds
 start_time = time.time()
 
 
@@ -14,22 +12,17 @@ def is_prime(n):
     r = int(n ** 0.5)
     f = 5
     while f <= r:
-        if n % f == 0: return False
-        if n % (f + 2) == 0: return False
+        if n % f == 0 or n % (f + 2) == 0: return False
         f += 6
     return True
 
 
-SIZE = 30001
-
-i = 1
-total = 0
-increment = 2
-counter = 1
+size = 30001
+size_sq = size ** 2
+counter, i, prime_no, increment = 1, 1, 0, 2
 debug_str = "Checked %d numbers on diagonals, found %d primes, square area %d, ratio %f"
 
-prime_no = 0
-while i <= SIZE ** 2:
+while i <= size_sq:
     if (increment + 1) ** 2 == i:
         ratio = round(prime_no / float(counter) * 100, 6)
         if ratio < 10.0:
