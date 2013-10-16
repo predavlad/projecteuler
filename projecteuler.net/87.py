@@ -1,6 +1,6 @@
 import time
 
-# 0.8 seconds, hell yea !!!!
+# 0.8 seconds
 start_time = time.time()
 
 def get_primes(n):

@@ -1,10 +1,7 @@
-import math
-import time
 import numpy
-
+import time
+import math
 start_time = time.time()
-
-
 
 def get_primes(n):
     """ Input n>=6, Returns a array of primes, 2 <= p < n """
@@ -17,8 +14,20 @@ def get_primes(n):
     return numpy.r_[2, 3, ((3 * numpy.nonzero(sieve)[0][1:] + 1) | 1)]
 
 
-primes = get_primes(10000)
+lim = 10 ** 50
+root = lim ** 0.5
+primes = get_primes(int(math.sqrt(lim))+1)
 
+squares = set()
+for i in primes:
+    if primes[i] > root:
+        break
+    square = j = primes[i] ** 2
+    while j < lim:
+        squares.add(j)
+        j += square
 
+print len(squares)
+print 2 ** 50 - len(squares)
 
-print time.time() - start_time, "seconds"
+print 'Seconds', time.time() - start_time
