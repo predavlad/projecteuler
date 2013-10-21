@@ -4,14 +4,23 @@ import math
 
 start_time = time.time()
 
-def is_prime(n):
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
-            return False
-    return True
+def get_primes(n):
+    """
+    Get all the primes smaller than n
+    """
+    primes = [0] * n
+    for i in xrange(2, n):
+        if primes[i] == 0:
+            yield i
+        else:
+            continue
+        for j in xrange(1, n // i):
+            primes[j * i] = 1
 
-for i in xrange(10 ** 8 + 1, 10 ** 8 + 10 ** 5, 2):
-    is_prime(i)
+
+for p in get_primes(10 ** 6):
+    pass
+
 
 
 print time.time() - start_time, "seconds"
