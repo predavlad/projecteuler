@@ -1,6 +1,7 @@
 import time
 import math
 
+# 0.0 seconds
 start_time = time.time()
 
 

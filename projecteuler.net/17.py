@@ -1,5 +1,6 @@
 import time
 
+# 0.003
 start_time = time.time()
 
 num2words = {

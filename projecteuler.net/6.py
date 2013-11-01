@@ -1,5 +1,6 @@
 import time
 
+# 0.0 seconds
 start_time = time.time()
 
 length = 101

@@ -1,6 +1,7 @@
 import time
 from operator import mul
 
+# 0.0 seconds
 start_time = time.time()
 
 product = str(reduce(mul, xrange(2, 101)))

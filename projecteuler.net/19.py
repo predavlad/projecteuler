@@ -1,6 +1,7 @@
 import time
 import datetime
 
+# 0.03
 start_time = time.time()
 
 varDate = datetime.datetime.strptime('1/1/1900', "%m/%d/%Y")

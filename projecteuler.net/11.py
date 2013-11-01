@@ -1,6 +1,7 @@
 import time
 from operator import mul
 
+# 0.004 seconds
 start_time = time.time()
 
 

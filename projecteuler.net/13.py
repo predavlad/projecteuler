@@ -1,4 +1,6 @@
 import time
+
+# 0.0 seconds
 start_time = time.time()
 
 numbers = """37107287533902102798797998220837590246510135740250

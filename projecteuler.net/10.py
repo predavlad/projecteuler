@@ -1,4 +1,5 @@
 import time
+
 # 0.7 seconds, fairly decent
 start_time = time.time()
 

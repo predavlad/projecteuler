@@ -3,7 +3,7 @@ import math
 from fractions import gcd
 from operator import mul
 
-# 0.0 seconds!
+# 0.0 seconds
 start_time = time.time()
 
 

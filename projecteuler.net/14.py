@@ -1,7 +1,6 @@
-import random
 import time
 
-# 4 second run time
+# 3.5 seconds
 start_time = time.time()
 
 
