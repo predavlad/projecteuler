@@ -1,17 +1,10 @@
-# identical code as #18
 import time
 
+# 0.008 seconds
 start_time = time.time()
 
-txt = open('67.txt')
-triangle = txt.read()
 
-
-def split_text(text):
-    return text.split(' ')
-
-
-matrix = map(split_text, triangle.split("\n"))
+matrix = [i.split(' ') for i in open('67.txt').read().split("\n")]
 
 for i in range(len(matrix) - 1, -1, -1):
     for j in range(i, -1, -1):

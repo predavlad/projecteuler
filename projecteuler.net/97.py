@@ -1,26 +1,22 @@
 import time
 
-# 2 seconds
+# 0.04 seconds
 start_time = time.time()
-
-
-def strip_number(n):
-    if len(str(n)) <= 10:
-        return n
-    else:
-        return int(''.join(str(n)[-10:]))
 
 number = 28433
 power = 7830457
+lim = 10 ** 10
+no_lim = 1000
 
 while power > 0:
-    if power > 10:
-        number *= 2 ** 10
-        power -= 10
+    if power > no_lim:
+        number *= 2 ** no_lim
+        power -= no_lim
     elif power > 0:
         number *= 2
         power -= 1
-    number = strip_number(number)
+    number %= lim
+
 
 print number + 1
 

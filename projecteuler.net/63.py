@@ -1,5 +1,6 @@
 import time
 
+# 0.004 seconds
 start_time = time.time()
 
 counter = 0

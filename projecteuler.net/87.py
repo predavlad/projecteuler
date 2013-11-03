@@ -1,6 +1,6 @@
 import time
 
-# 0.8 seconds
+# 0.9 seconds
 start_time = time.time()
 
 def get_primes(n):
@@ -24,9 +24,6 @@ numbers = set()
 for i in range(2, 5):
     primes[i] = get_primes(get_prime_limit(i, limit))
 
-print get_prime_limit(2, limit)
-print get_prime_limit(3, limit)
-print get_prime_limit(4 , limit)
 
 for i in primes[2]:
     for j in primes[3]:
@@ -35,7 +32,7 @@ for i in primes[2]:
             if n <= limit:
                 numbers.add(n)
 
-# print numbers
+
 print len(numbers)
 
 print time.time() - start_time, 'seconds'

@@ -1,14 +1,14 @@
 import time
 import math
 
-# run time - 2 seconds
+# 0.0 seconds
 start_time = time.time()
 
 
 def is_prime(nr):
     if nr == 2:
         return True
-    limit = int(math.ceil(math.sqrt(nr))) + 1
+    limit = int(math.sqrt(nr)) + 1
     for i in range(2, limit):
         if nr % i == 0:
             return False
@@ -69,28 +69,26 @@ assert get_toilent_all(10) == 4
 # print "Max ratio: ", max_ratio
 
 def get_primes(n):
-    numbers = set(range(n, 1, -1))
-    primes = []
-    while numbers:
-        p = numbers.pop()
-        primes.append(p)
-        numbers.difference_update(set(range(p * 2, n + 1, p)))
-    return primes
+    """
+    Get all the primes smaller than n
+    """
+    primes = [0] * n
+    for i in xrange(2, n):
+        if primes[i] == 0:
+            yield i
+        else:
+            continue
+        for j in xrange(1, n // i):
+            primes[j * i] = 1
 
 
-primes = get_primes(200)
 prod = 1
-for i in primes:
+for i in get_primes(200):
     old_prod = prod
     prod *= i
     if prod > 1000000:
         print old_prod
         break
-
-
-
-
-
 
 
 print time.time() - start_time, "seconds"

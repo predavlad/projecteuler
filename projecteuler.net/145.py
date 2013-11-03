@@ -1,12 +1,14 @@
 import time
 
-# crappy brute force solution. 111 seconds
+# 110 seconds
 start_time = time.time()
 
 
 def is_reversible(n):
-    rev = int(str(n)[::-1])
-    s = rev + n
+    """
+    Check if a number is reversible
+    """
+    s = n + int(str(n)[::-1])
     for l in str(s):
         if int(l) % 2 == 0:
             return False
@@ -14,10 +16,10 @@ def is_reversible(n):
 
 
 # this will be enough, since 10 ** 9 gives no solutions
-LIMIT = 10 ** 8
+lim = 10 ** 8
 
 counter = 0
-for i in xrange(1, LIMIT, 2):
+for i in xrange(1, lim, 2):
     if int(str(i)[0]) % 2 != 0:
         continue
     if is_reversible(i):

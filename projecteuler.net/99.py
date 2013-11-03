@@ -1,16 +1,15 @@
 import time
 import math
 
+# 0.0.
 start_time = time.time()
 
-txt = open('base_exp.txt').read().split("\n")
-max_line = 0
-current_line = 0
-max_value = 0
+txt = [i.split(',') for i in open('99.txt').read().split("\n") if i != '']
+max_value = current_line = max_line = 0
 
 for pair in txt:
+    n, power = int(pair[0]), int(pair[1])
     current_line += 1
-    n, power = map(int, pair.split(','))
     temp = power * math.log(n)
     if temp > max_value:
         max_value = temp

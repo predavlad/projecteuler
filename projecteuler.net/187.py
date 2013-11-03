@@ -1,8 +1,10 @@
 import numpy
-import math
+import time
 from bisect import bisect
 
-#quite proud of this solution. Time: 0.3 seconds
+# 0.3 seconds
+start_time = time.time()
+
 
 def get_primes(n):
     """ Input n>=6, Returns a array of primes, 2 <= p < n """
@@ -15,15 +17,17 @@ def get_primes(n):
     return numpy.r_[2, 3, ((3 * numpy.nonzero(sieve)[0][1:] + 1) | 1)]
 
 
-LIMIT = 10 ** 8
-primes = get_primes(LIMIT / 2)
+lim = 10 ** 8
+primes = get_primes(lim / 2)
 semi_primes = 0
 
-for i in xrange(int(math.sqrt(len(primes))) + 1):
-    diff = LIMIT // primes[i]
+for i in xrange(int(len(primes) ** 0.5) + 1):
+    diff = lim // primes[i]
     pos = bisect(primes, diff)
     if (pos - i) <= 0:
         continue
     semi_primes += abs(pos - i)
 
 print semi_primes
+
+print time.time() - start_time, "seconds"

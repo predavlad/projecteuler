@@ -1,14 +1,14 @@
 import time
 
-# runs in 200+ seconds, but it's poorly optimized
+# ~200 seconds
 start_time = time.time()
 
+
 def get_next(n):
-    n = list(str(n))
-    new_n = 0
-    for i in n:
-        new_n += int(i) ** 2
-    return new_n
+    """
+    Get the sum of digit squares
+    """
+    return sum([int(i) ** 2 for i in str(n)])
 
 
 def set_cache(lst, val):
@@ -41,11 +41,11 @@ assert get_rez(32) == 1
 
 count_89 = 0
 
-for i in range(1, 10000000):
+for i in xrange(1, 10 ** 7):
     rez = get_rez(i)
     if rez == 89:
         count_89 += 1
-    if i % 10000 == 0:
+    if i % 100000 == 0:
         print i, count_89
 
 print count_89

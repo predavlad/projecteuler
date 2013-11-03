@@ -1,5 +1,6 @@
 import time
 
+# 0.0 seconds
 start_time = time.time()
 
 g = 1.6180339887498949  # golden ratio

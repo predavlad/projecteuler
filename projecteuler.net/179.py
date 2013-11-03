@@ -1,6 +1,6 @@
 import time
 
-# 40 seconds. Not a great solution, but it's under 1 minute
+# 40 seconds
 # after it reaches 1% it speeds up exponentially
 start_time = time.time()
 

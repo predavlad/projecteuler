@@ -1,17 +1,21 @@
 import time
 
-# 0.5 seconds
+# 0.36 seconds
 start_time = time.time()
 
 
 def get_primes(n):
-    numbers = set(range(n, 1, -1))
-    primes = []
-    while numbers:
-        p = numbers.pop()
-        primes.append(p)
-        numbers.difference_update(set(range(p * 2, n + 1, p)))
-    return primes
+    """
+    Get all the primes smaller than n
+    """
+    primes = [0] * n
+    for i in xrange(2, n):
+        if primes[i] == 0:
+            yield i
+        else:
+            continue
+        for j in xrange(1, n // i):
+            primes[j * i] = 1
 
 
 def get_remainder(p, n):
@@ -20,9 +24,9 @@ def get_remainder(p, n):
     return 2 * n * p
 
 
-primes = get_primes(1000000)
+primes = list(get_primes(10 ** 6))
 
-for i in range(len(primes)):
+for i in xrange(len(primes)):
     power = i + 1
     if power % 2 == 0:
         continue

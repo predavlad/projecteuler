@@ -32,6 +32,7 @@ while not found:
     if counter % 500 == 0:
         print counter
 
+
 print counter
 print f2
 

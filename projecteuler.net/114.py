@@ -1,5 +1,6 @@
 import time
 
+# 0.007
 start_time = time.time()
 
 ROW_LEN = 50
