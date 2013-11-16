@@ -1,0 +1,60 @@
+1.
+# file size
+df -h
+du -hs
+
+2.
+# listare fisiere / directoare
+ls -F
+ls -l
+ls -R # sau tree
+ls -i # inode
+ls -d # info despre folderul cerut
+
+
+3. Metacaractere:
+*   - 0 sau mai multe caractere
+?   - 1 caracter
+^   - negare
+
+ls a[1-9].jpg
+ls a[137].jpg
+
+4. Redirectionari / Piping
+comanda > fisier # stdout
+comanda 2> fisier # stderr
+comanda >> fisier # stdout append
+
+5. Piping
+com1 | com2 | com3
+ping -c 2 c.ro | tail -n 2 | head -n 1| cut -d"," -f3 | cut -d"%" -f1
+
+6. Creare fisiere/dir
+touch
+mkdir
+mkdir -p a/b/c
+
+7. Stergere
+rm
+
+Optiuni:
+-r  # recursiv
+-i  # interactiv
+-f  # force
+
+8. Copiere
+
+cp sursa dest
+
+9. Analiza continut fisiere
+file
+wc
+cat /etc/apache2/apache2.conf | grep "^[^#]" | wc -l
+
+10. Accesare continut fisier
+cat
+tac
+more
+less
+head
+tail
