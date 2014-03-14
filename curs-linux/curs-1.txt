@@ -1,6 +1,0 @@
-"Arhitectura" linux:
-- Kernel
-    -> Management resurse (procesor, memorie, harware)
-- Shell
-    -> Interpretor de comenzi
-- Sistem de fisiere si aplicatii
