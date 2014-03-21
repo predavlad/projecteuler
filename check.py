@@ -62,19 +62,13 @@ def time_limit_check_domain(domain, seconds=0):
 if __name__ == '__main__':
     # domains = list(open("domains.txt").read().split("\n"))
     script, names, tlds = argv
-    names = names.split(',')
-    tlds = tlds.split(',')
+    names, tlds = names.split(','), tlds.split(',')
 
     domains = generate_domains(names, tlds)
-
     domains = [domain for domain in domains if len(domain) > 3]
-
-    nr_domains = len(domains)
 
     processes = 40  # cpu_count() * 2
 
-    pool = Pool(processes=processes)
-    rez = pool.map(time_limit_check_domain, domains)
+    rez = Pool(processes=processes).map(time_limit_check_domain, domains)
     print json.dumps(list(rez))
 
-# print time.time() - start_time, "seconds"
