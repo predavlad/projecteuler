@@ -1,0 +1,1 @@
+<?for($a=range(A,Z);$i++<26;$a[]=array_shift($a))echo join('',$a),~õ;

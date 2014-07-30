@@ -1,0 +1,1 @@
+<?for(;$i<NUM;)echo++$i%3?!$$i=$i:Fizz,$i%5?$$i:Buzz,~õ;
